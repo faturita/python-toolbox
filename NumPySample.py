@@ -46,7 +46,7 @@ print z
 print np.concatenate((x,y,z))
 
 print 'Concatenate according to axis'
-z = np.concatenate((x,y),axis = 1)
+z = np.concatenate((x,y),axis = 0)
 print z
 
 print 'Adding new dimensions'
@@ -57,3 +57,40 @@ print y
 
 print np.zeros((30,30))
 print np.ones((29,2))
+
+import sys
+
+print 'Input line parameters'
+print sys.argv
+
+print 'Byte order:'+str(sys.byteorder)
+print sys.exec_prefix
+print sys.executable
+print sys.modules
+print sys.path
+print sys.version_info
+print sys.platform
+
+
+print sys.argv[0]
+
+a=[1,2,3,4,5]
+
+print a
+print 'List with the last two elements truncated.'
+print a[:-2]
+
+a.append(3)
+a.pop(1)
+print a
+print a.count(1)
+a.remove(3)
+print a
+a.extend([3,2])
+print a
+a.reverse()
+print a
+print a.index(3)
+a.sort()
+a.insert(2, [3,2])
+print a
