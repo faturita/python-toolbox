@@ -17,6 +17,8 @@ cv2.imwrite('01.jpg', image)
 
 print ( image.item ( (0,0,0) ))
 
+np.where( labels == 3 )
+
 print ('Lets convert the numpy array to standard python array:')
 
 bgrByteArray = bytearray( image )
