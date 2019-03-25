@@ -47,24 +47,34 @@ cv2.imwrite("contorno.png",image)
 
 
 
+image20 = cv2.imread("../fotosverdes/FotosOriginales/Individuo 2/GRANDES/N1/PGM/Tiempo20.pgm")
+
+cv2.drawContours(image20, contours, -1, (0,255,0), 3)
+
+cv2.imshow("Time 20", image20)
+cv2.waitKey(0)
+
+print (contours)
 
 
-img = oimage
-img = rgb2gray(img)
 
-s = np.linspace(0, 2*np.pi, 400)
-x = 500 + 470*np.cos(s)
-y = 500 + 470*np.sin(s)
-init = np.array([x, y]).T
+if (False):
+    img = oimage
+    img = rgb2gray(img)
 
-snake = active_contour(gaussian(img, 3),
-                       init)
+    s = np.linspace(0, 2*np.pi, 400)
+    x = 500 + 470*np.cos(s)
+    y = 500 + 470*np.sin(s)
+    init = np.array([x, y]).T
 
-fig, ax = plt.subplots(figsize=(7, 7))
-ax.imshow(img, cmap=plt.cm.gray)
-ax.plot(init[:, 0], init[:, 1], '--r', lw=3)
-ax.plot(snake[:, 0], snake[:, 1], '-b', lw=3)
-ax.set_xticks([]), ax.set_yticks([])
-ax.axis([0, img.shape[1], img.shape[0], 0])
+    snake = active_contour(gaussian(img, 3),
+                           init)
 
-plt.show()
+    fig, ax = plt.subplots(figsize=(7, 7))
+    ax.imshow(img, cmap=plt.cm.gray)
+    ax.plot(init[:, 0], init[:, 1], '--r', lw=3)
+    ax.plot(snake[:, 0], snake[:, 1], '-b', lw=3)
+    ax.set_xticks([]), ax.set_yticks([])
+    ax.axis([0, img.shape[1], img.shape[0], 0])
+
+    plt.show()
