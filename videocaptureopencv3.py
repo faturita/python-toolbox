@@ -11,6 +11,9 @@ import time
 import numpy as np
 import cv2
 
+import sys
+import os
+
 cap = cv2.VideoCapture(0)
 cap.set(3,640)
 cap.set(4,480)
@@ -33,6 +36,8 @@ while(True):
    cv2.drawKeypoints(frame, kps, frame, (0, 255, 0))
 
    cv2.imshow("ViewWindow", frame)
+
+   sys.stdout.write(str(frame.tostring()))
 
    if cv2.waitKey(1) & 0xFF == ord('q'):
       break
