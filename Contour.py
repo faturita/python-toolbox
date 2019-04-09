@@ -54,8 +54,24 @@ cv2.drawContours(image20, contours, -1, (0,255,0), 3)
 cv2.imshow("Time 20", image20)
 cv2.waitKey(0)
 
-print (contours)
+print (contours[0][0])
 
+print (np.shape(contours[0])[0])
+
+for i in range(0,np.shape(contours[0])[0]):
+    c = contours[0][i]
+    if (c[0][0] == 0):
+        print (c[0])
+        contours[0] = np.delete(contours[0], i)
+
+
+
+
+c = contours[0]
+
+a = np.where( c == ([0,0]))
+
+print (np.shape(a))
 
 
 if (False):
