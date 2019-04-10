@@ -19,7 +19,7 @@ from skimage.segmentation import active_contour
 
 image = cv2.imread("../fotosverdes/FotosOriginales/Individuo 2/GRANDES/N1/PGM/Tiempo1.pgm")
 cv2.imshow("Time 1", image)
-cv2.waitKey(0)
+#cv2.waitKey(0)
 
 oimage = cv2.imread("../fotosverdes/FotosOriginales/Individuo 2/GRANDES/N1/PGM/Tiempo1.pgm")
 
@@ -41,7 +41,7 @@ cv2.drawContours(image, contours, -1, (0,255,0), 3)
 
 
 cv2.imshow("2", image)
-cv2.waitKey(0);
+#cv2.waitKey(0);
 
 cv2.imwrite("contorno.png",image)
 
@@ -52,26 +52,52 @@ image20 = cv2.imread("../fotosverdes/FotosOriginales/Individuo 2/GRANDES/N1/PGM/
 cv2.drawContours(image20, contours, -1, (0,255,0), 3)
 
 cv2.imshow("Time 20", image20)
-cv2.waitKey(0)
+#cv2.waitKey(0)
 
 print (contours[0][0])
 
-print (np.shape(contours[0])[0])
+print("Number of curves:")
+print (np.shape(contours))
 
-for i in range(0,np.shape(contours[0])[0]):
-    c = contours[0][i]
-    if (c[0][0] == 0):
-        print (c[0])
-        contours[0] = np.delete(contours[0], i)
+print ("Eliminating the border curve.")
+contours = np.delete(contours, 0)
 
+print("Number of curves:")
+print (np.shape(contours))
 
+curveindex = []
+for i in contours:
+    print("Curve length:" + str( np.shape(i)[0]  ) )
+    curveindex.append( np.shape(i)[0]  )
 
+ncurveindex = np.array(curveindex)
 
+print("Max length:" + str( ncurveindex.max()   ) + " at " + str(ncurveindex.argmax()))
+
+print ("Reshaping the contour list...")
+contours = np.array( contours[ncurveindex.argmax()] )
+
+image20 = cv2.imread("../fotosverdes/FotosOriginales/Individuo 2/GRANDES/N1/PGM/Tiempo20.pgm")
+
+cv2.drawContours(image20, contours, -1, (0,255,0), 3)
+
+cv2.imshow("Time 20", image20)
+cv2.waitKey(0)
+
+# Get the curve
 c = contours[0]
 
-a = np.where( c == ([0,0]))
+for p in c:
+    print(p)
+    break
 
-print (np.shape(a))
+
+
+#for x in range(0,np.shape(image20)[0]):
+#    for y in range(0,np.shape(image20)[1]):
+#        print ([x,y])
+
+
 
 
 if (False):
