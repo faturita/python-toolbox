@@ -82,21 +82,50 @@ image20 = cv2.imread("../fotosverdes/FotosOriginales/Individuo 2/GRANDES/N1/PGM/
 cv2.drawContours(image20, contours, -1, (0,255,0), 3)
 
 cv2.imshow("Time 20", image20)
-cv2.waitKey(0)
+#cv2.waitKey(0)
 
 # Get the curve
-c = contours[0]
+c = contours
 
 for p in c:
     print(p)
     break
 
 
+print(c.shape)
+Xs = c[:, 0,0]
+Ys = c[:, 0,1]
 
-#for x in range(0,np.shape(image20)[0]):
-#    for y in range(0,np.shape(image20)[1]):
-#        print ([x,y])
+print (Xs.shape)
+print (Ys.shape)
 
+print (c)
+for x in range(0,np.shape(image20)[0]):
+    for y in range(0,np.shape(image20)[1]):
+        print ([x,y])
+        b = np.where( Xs == x)
+        #print (c[b])
+        d = np.where( Ys[b] > y)
+        #print ("Elements found:" + str(np.shape(d[0])))
+        #print (d[0])
+        #print (b[0][d[0]])
+        #print (c[b[0][d[0]]])
+
+        e = np.where( Ys[b] < y)
+        #print ("Elements found:" + str(np.shape(e[0])))
+        #print (e[0])
+        #print (b[0][e[0]])
+        #print (c[b[0][e[0]]])
+
+
+        if (np.shape(d[0])[0]>0 and np.shape(e[0])[0]>0):
+            image20[y,x] = 255
+
+cv2.imshow("Time 20", image20)
+cv2.waitKey(0)
+
+# Bien funca pero hace lio con las areas inconexas.
+# A efectos practicos me sirve.
 
 
 
