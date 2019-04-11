@@ -78,11 +78,15 @@ print ("Reshaping the contour list...")
 contours = np.array( contours[ncurveindex.argmax()] )
 
 image20 = cv2.imread("../fotosverdes/FotosOriginales/Individuo 2/GRANDES/N1/PGM/Tiempo20.pgm")
+# Otsu's thresholding after Gaussian filtering
+imgray = cv2.cvtColor(image20, cv2.COLOR_BGR2GRAY)
+blur = cv2.GaussianBlur(imgray,(5,5),0)
+ret3,th3 = cv2.threshold(blur,0,255,cv2.THRESH_BINARY+cv2.THRESH_OTSU)
 
-cv2.drawContours(image20, contours, -1, (0,255,0), 3)
+cv2.drawContours(th3, contours, -1, (0,255,0), 3)
 
-cv2.imshow("Time 20", image20)
-#cv2.waitKey(0)
+cv2.imshow("Time 20", th3)
+cv2.waitKey(0)
 
 # Get the curve
 c = contours
@@ -100,8 +104,9 @@ print (Xs.shape)
 print (Ys.shape)
 
 print (c)
-for x in range(0,np.shape(image20)[0]):
-    for y in range(0,np.shape(image20)[1]):
+k=0
+for x in range(0,np.shape(th3)[0]):
+    for y in range(0,np.shape(th3)[1]):
         print ([x,y])
         b = np.where( Xs == x)
         #print (c[b])
@@ -120,6 +125,7 @@ for x in range(0,np.shape(image20)[0]):
 
         if (np.shape(d[0])[0]>0 and np.shape(e[0])[0]>0):
             image20[y,x] = 255
+            k = k + 1
 
 cv2.imshow("Time 20", image20)
 cv2.waitKey(0)
@@ -127,6 +133,8 @@ cv2.waitKey(0)
 # Bien funca pero hace lio con las areas inconexas.
 # A efectos practicos me sirve.
 
+print (k)
+print((k*1.0)/(1024*1024))
 
 
 if (False):
