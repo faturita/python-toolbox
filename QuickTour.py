@@ -518,3 +518,19 @@ print(x)
 #  [ 2.23606798  1.          0.        ]]
 d = squareform(pdist(x, 'euclidean'))
 print(d)
+
+import sys
+
+print 'Input line parameters'
+print sys.argv
+
+print 'Byte order:'+str(sys.byteorder)
+print sys.exec_prefix
+print sys.executable
+print sys.modules
+print sys.path
+print sys.version_info
+print sys.platform
+
+
+print sys.argv[0]
