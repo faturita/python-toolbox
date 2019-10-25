@@ -518,3 +518,8 @@ print(x)
 #  [ 2.23606798  1.          0.        ]]
 d = squareform(pdist(x, 'euclidean'))
 print(d)
+
+
+https://github.com/chiphuyen/python-is-cool/blob/master/cool-python-tips.ipynb
+
+
