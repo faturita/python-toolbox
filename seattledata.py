@@ -1,40 +1,25 @@
-import urllib, json
-url = 'https://data.seattle.gov/api/views/jbb5-9wmt/rows.json?accessType=DOWNLOAD'
-response = urllib.urlopen(url)
-rawschools = json.loads(response.read())
-print json.dumps(rawschools, indent=4, sort_keys=True)
-rawschools['data'][1]
+# Python 3
+
+import urllib.request, json
+url = 'https://data.seattle.gov/resource/tmmm-ytt6.json'
+response = urllib.request.urlopen(url)
+rawcheckout = json.loads(response.read())
+print(json.dumps(rawcheckout, indent=4, sort_keys=True))
+print(rawcheckout[1])
 
 sx=[]
 sy=[]
-schools = []
-for school in rawschools['data']:
-    sx.append(float(school[11][2]))
-    sy.append(float(school[11][1]))
-    geo=[float(school[11][1]), float(school[11][2])]
-    schools.append(geo)
-    print geo
+books = []
+for book in rawcheckout:
+    sx.append(int(book['checkoutmonth']))
+    sy.append(int(book['checkouts']))
+    books.append(book['title'])
 
-url2='https://data.seattle.gov/api/views/b9ut-byji/rows.json?accessType=DOWNLOAD'
-response = urllib.urlopen(url2)
-publictoilet = json.loads(response.read())
-print json.dumps(publictoilet, indent=4, sort_keys=True)
-
-toilets = []
-x=[]
-y=[]
-for toilet in publictoilet['data']:
-    x.append(float(toilet[12]))
-    y.append(float(toilet[13]))
-    geo=[float(toilet[12]), float(toilet[13])]
-    toilets.append(geo)
-    print geo
 
 import matplotlib.pyplot as plt
 fig = plt.figure()
 ax1 = fig.add_subplot(111)
 
-ax1.scatter(x, y, s=10, c='b', marker="x", label='Toilets')
-ax1.scatter(sx,sy, s=10, c='r', marker="o", label='Schools!')
+ax1.scatter(sx,sy,  c='r', marker="o", label='Month of checkout vs Number of checkouts')
 plt.legend(loc='upper left');
 plt.show()

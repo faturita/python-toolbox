@@ -30,7 +30,7 @@ mat['data'][0][0][4]
 # Data point zero for the eight channels.  Should be in V.
 signal = mat['data'][0][0][1] * pow(10,6)
 
-print signal.shape
+print (signal.shape)
 
 ch_names=[ 'Fz'  ,  'Cz',    'Pz' ,   'Oz'  ,  'P3'  ,  'P4'   , 'PO7'   , 'PO8']
 ch_types= ['eeg'] * signal.shape[1]
@@ -58,7 +58,7 @@ t_type = mat['data'][0][0][2]
 
 signal_events = np.concatenate([signal, t_type],1)
 
-info_events = mne.create_info(ch_names_events,256, ch_types_events,true)
+info_events = mne.create_info(ch_names_events,256, ch_types_events,True)
 
 eeg_events = mne.io.RawArray(signal_events.T, info_events)
 
@@ -72,7 +72,7 @@ tmax = 1
 epochs = mne.Epochs(eeg_mne, event_times, event_id, tmin, tmax)
 
 print ('Epochs x channels x time')
-print epochs.get_data().shape
+print (epochs.get_data().shape)
 
 evoked = epochs.average()
 
@@ -81,7 +81,7 @@ evoked.plot()
 
 epochsn = mne.Epochs(eeg_mne, event_times, {'first':1}, tmin, tmax)
 
-print epochsn.get_data().shape
+print (epochsn.get_data().shape)
 
 evokedn = epochsn.average()
 

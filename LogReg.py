@@ -15,6 +15,7 @@ target = load_breast_cancer()['target']
 
 X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.2, shuffle=True)
 
+
 def sigmoid(x):
     return np.maximum(np.minimum(1 / (1 + np.exp(-x)), 0.9999), 0.0001)
 

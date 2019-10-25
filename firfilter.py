@@ -1,5 +1,8 @@
 from scipy.signal import firwin, remez, kaiser_atten, kaiser_beta
 
+from scipy import signal
+import matplotlib.pyplot as plt
+
 # Several flavors of bandpass FIR filters.
 
 def bandpass_firwin(ntaps, lowcut, highcut, fs, window='hamming'):
@@ -73,4 +76,27 @@ if __name__ == "__main__":
     plt.ylabel('Gain')
     plt.title('Frequency response of several FIR filters, %d taps' % ntaps)
 
+    plt.show()
+
+    fs = 10e3
+    N = 1e5
+    amp = 2 * np.sqrt(2)
+    noise_power = 0.01 * fs / 2
+    time = np.arange(N) / float(fs)
+    mod = 500*np.cos(2*np.pi*0.25*time)
+    carrier = amp * np.sin(2*np.pi*3e3*time + mod)
+    noise = np.random.normal(scale=np.sqrt(noise_power), size=time.shape)
+    noise *= np.exp(-time/5)
+    x = carrier + noise
+
+    f, t, Sxx = signal.spectrogram(x, fs)
+    plt.pcolormesh(t, f, Sxx)
+    plt.ylabel('Frequency [Hz]')
+    plt.xlabel('Time [sec]')
+    plt.show()
+
+    f, t, Sxx = signal.spectrogram(x, fs, return_onesided=False)
+    plt.pcolormesh(t, np.fft.fftshift(f), np.fft.fftshift(Sxx, axes=0))
+    plt.ylabel('Frequency [Hz]')
+    plt.xlabel('Time [sec]')
     plt.show()
