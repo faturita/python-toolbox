@@ -1,4 +1,4 @@
-% generate some fake data
+# generate some fake data
 t = 0:60;
 trend = 0.003*t.^2;
 x = trend + sin(0.1*2*pi*t) + randn(1,numel(t))*0.5;

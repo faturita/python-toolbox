@@ -534,3 +534,31 @@ print sys.platform
 
 
 print sys.argv[0]
+
+# Swaping values in a straightforward way
+a = 5                               
+b = 10                                                                
+a, b = b, a                                                                 print(a) # 10                               
+print(b) # 5
+
+
+def unique(list):
+    if len(list)==len(set(list)):
+        print("All elements are unique")
+    else:
+        print("List has duplicates")
+unique([1,2,3,4,5]) # All elements are unique
+
+
+from collections import Counter
+list = [1, 2, 3, 2, 4, 3, 2, 3]
+count = Counter(list)
+print(count) # {2: 3, 3: 3, 1: 1, 4: 1}
+
+
+
+def most_frequent(list):
+    return max(set(list), key = list.count)
+numbers = [1, 2, 3, 2, 4, 3, 1, 3]
+most_frequent(numbers) # 3
+
