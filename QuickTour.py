@@ -519,6 +519,9 @@ print(x)
 d = squareform(pdist(x, 'euclidean'))
 print(d)
 
+
+# Excellent guide https://github.com/chiphuyen/python-is-cool/blob/master/cool-python-tips.ipynb
+
 import sys
 
 print 'Input line parameters'
